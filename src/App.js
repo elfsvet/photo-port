@@ -1,12 +1,18 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import About from './components/About'
+import About from './components/About';
+import Nav from './components/Nav';
 // JSX
 function App() {
   return (
+    <div>
+      <Nav/>
+      <main>
 
-    <About />
+        <About/>
+      </main>
+    </div>
   );
 }
 
