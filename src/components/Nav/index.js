@@ -27,14 +27,14 @@ const Nav = () => {
     return (
         <header>
             <h2>
-                <a href="/">
+                <a data-testid="link" href="/">
                     <span role="img" aria-label='camera'> 📷</span> Oh Snap!
                 </a>
             </h2>
             <nav>
                 <ul className='flex-row'>
                     <li className='mx-2'>
-                        <a href="#about">
+                        <a data-testid="about" href="#about">
                             About me
                         </a>
                     </li>
@@ -46,7 +46,7 @@ const Nav = () => {
                         <li
                             className="mx-1"
                             key={category.name}>
-                                {/* if we wont have anonymous function it will call the function on render of the components */}
+                            {/* if we wont have anonymous function it will call the function on render of the components */}
                             <span onClick={() => categorySelected(category.name)}>
                                 {capitalizeFirstLetter(category.name)}
                             </span>
