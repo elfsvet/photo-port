@@ -1,5 +1,6 @@
+/* eslint-disable testing-library/prefer-screen-queries */
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Modal from '..';
 
@@ -24,19 +25,25 @@ describe('Modal is rendering', () => {
     })
     it('matches snapshot', () => {
         // arrange the snapshot = declare variable
-        const { getByText } = render(<Modal
+        const { asFragment } = render(<Modal
             onClose={mockToggleModal}
             currentPhoto={currentPhoto}
         />)
         // assert the match
-        // expect{getByText}
+        expect(asFragment()).toMatchSnapshot();
     })
 });
 
 describe('Click Event', () => {
     it('calls onClose handler', () => {
         // Arrange: Render Modal
+        const { getByText } = render(<Modal
+            onClose={mockToggleModal}
+            currentPhoto={currentPhoto}
+        />)
         // Act: Simulate click event
+        fireEvent.click(getByText('Close this modal'));
         // Assert: Expected matcher
+        expect(mockToggleModal).toHaveBeenCalledTimes(1);
     });
 })  
