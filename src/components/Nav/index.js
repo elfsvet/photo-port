@@ -1,15 +1,17 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { capitalizeFirstLetter } from '../../utils/helpers';
 
 const Nav = (props) => {
 
-    
+
     const {
-        categories =[],
+        categories = [],
         setCurrentCategory,
-        currentCategory
+        currentCategory,
+        contactSelected,
+        setContactSelected
     } = props;
-    
+
     useEffect(() => {
         document.title = capitalizeFirstLetter(currentCategory.name);
     }, [currentCategory]);
@@ -29,20 +31,22 @@ const Nav = (props) => {
             <nav>
                 <ul className='flex-row'>
                     <li className='mx-2'>
-                        <a data-testid="about" href="#about">
+                        <a data-testid="about" href="#about" onClick={() => setContactSelected(false)}>
                             About me
                         </a>
                     </li>
-                    <li>
-                        <span>Contact</span>
+                    <li className={`mx-2 ${contactSelected && 'navActive'}`}>
+                        <span onClick={() => setContactSelected(true)}>Contact</span>
                     </li>
                     {/* the single element should be return from map. that's why we use () not {} */}
                     {categories.map((category) => (
                         <li
-                            className={`mx-1 ${
-                                currentCategory.name === category.name && 'navActive'}`} key={category.name}>
+                            className={`mx-1 ${currentCategory.name === category.name && !contactSelected && 'navActive'}`} key={category.name}>
                             {/* if we wont have anonymous function it will call the function on render of the components */}
-                            <span onClick={() => setCurrentCategory(category)}>
+                            <span onClick={() => {
+                                setCurrentCategory(category);
+                                setContactSelected(false);
+                            }}>
                                 {capitalizeFirstLetter(category.name)}
                             </span>
                         </li>

@@ -7,6 +7,7 @@ import Gallery from './components/Gallery';
 import ContactForm from './components/Contact';
 // JSX
 function App() {
+  const [contactSelected, setContactSelected] = useState(false);
   const [categories] = useState([
     {
       name: 'commercial',
@@ -22,13 +23,25 @@ function App() {
   return (
     <div>
       <Nav categories={categories}
-      setCurrentCategory={setCurrentCategory}
-      currentCategory={currentCategory}
+        setCurrentCategory={setCurrentCategory}
+        currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       />
       <main>
-        <ContactForm />
-        <Gallery currentCategory={currentCategory}/>
-        <About />
+        {/* if (!contactSelected) TERNARY OPERATOR */}
+        {!contactSelected ? (
+          // react fragments <></> <React.fragments></React.fragments>
+          <>
+            <Gallery currentCategory={currentCategory} />
+            <About />
+          </>
+          // else
+        ) : (
+          <ContactForm />
+        )
+        }
+
       </main>
     </div>
   );
