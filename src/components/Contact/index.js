@@ -32,7 +32,7 @@ const ContactForm = () => {
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        console.log(formState);
+        // console.log(formState);
     }
     return (
         <section>
